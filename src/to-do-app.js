@@ -38,6 +38,12 @@ class TodoApp extends HTMLElement {
 
         this.$submitButton = this._shadowRoot.querySelector('button');
         this.$submitButton.addEventListener('click', this._addTodo.bind(this))
+        this.$input.addEventListener('keydown', (event) => {
+            if (event.key === "Enter") {
+                this._addTodo();
+            }
+        })
+
         document.querySelector('to-do-app').todos = [];
     }
 
@@ -59,18 +65,6 @@ class TodoApp extends HTMLElement {
             this._renderTodoList();
             this.$input.value = '';
         }
-    }
-
-    _toggleTodo(e) {
-        const todo = this._todos[e.detail];
-        console.log('todo in toggle', todo)
-        // write this in another way 
-        // this._todos[e.detail] = Object.assign({}, todo, {
-        //     checked: !todo.checked
-        // });
-
-        this._todos[e.detail] = {...todo, checked: !todo.checked}
-        this._renderTodoList();
     }
 
     _renderTodoList() {
@@ -95,6 +89,18 @@ class TodoApp extends HTMLElement {
 
     _removeTodo(e) {
         this._todos.splice(e.detail, 1);
+        this._renderTodoList();
+    }
+
+    _toggleTodo(e) {
+        const todo = this._todos[e.detail];
+        console.log('todo in toggle', todo)
+        // write this in another way 
+        // this._todos[e.detail] = Object.assign({}, todo, {
+        //     checked: !todo.checked
+        // });
+
+        this._todos[e.detail] = {...todo, checked: !todo.checked}
         this._renderTodoList();
     }
 }

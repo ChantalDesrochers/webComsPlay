@@ -1,31 +1,34 @@
-const template = document.createElement('template');
-template.innerHTML = `
-<style>
-    :host {
-    display: block;
-    font-family: sans-serif;
-    }
+// const template = document.createElement('template');
+// template.innerHTML = `
+// <style>
+//     :host {
+//     display: block;
+//     font-family: sans-serif;
+//     }
 
-    .completed {
-    text-decoration: line-through;
-    }
+//     .completed {
+//     text-decoration: line-through;
+//     }
 
-    button {
-    border: none;
-    cursor: pointer;
-    }
-</style>
-<li class="item">
-    <input type="checkbox">
-    <label></label>
-    <button>❌</button>
-</li>
-`;
+//     button {
+//     border: none;
+//     cursor: pointer;
+//     }
+// </style>
+// <li class="item">
+//     <input type="checkbox">
+//     <label></label>
+//     <button>❌</button>
+// </li>
+// `;
 
 class TodoItem extends  HTMLElement {
     constructor() {
         super();
         this._shadowRoot = this.attachShadow({ 'mode': 'open'});
+        // const clone = document.importNode(template.content, true)
+        // this._shadowRoot.appendChild(clone);
+        const template = document.querySelector('#item');
         this._shadowRoot.appendChild(template.content.cloneNode(true));
 
         this.$item = this._shadowRoot.querySelector('.item');
