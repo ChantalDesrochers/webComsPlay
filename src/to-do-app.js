@@ -48,7 +48,6 @@ class TodoApp extends HTMLElement {
     }
 
     set todos(value) {
-        console.log('value in set todos', value)
         this._todos = value;
         this._renderTodoList();
     }
@@ -58,8 +57,6 @@ class TodoApp extends HTMLElement {
     }
 
     _addTodo() {
-        console.log('input value', this.$input.value)
-        console.log('todos', this._todos)
         if(this.$input.value.length > 0) {
             this._todos.push({ text: this.$input.value, checked: false})
             this._renderTodoList();
@@ -94,12 +91,6 @@ class TodoApp extends HTMLElement {
 
     _toggleTodo(e) {
         const todo = this._todos[e.detail];
-        console.log('todo in toggle', todo)
-        // write this in another way 
-        // this._todos[e.detail] = Object.assign({}, todo, {
-        //     checked: !todo.checked
-        // });
-
         this._todos[e.detail] = {...todo, checked: !todo.checked}
         this._renderTodoList();
     }

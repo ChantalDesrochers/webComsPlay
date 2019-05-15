@@ -22,7 +22,7 @@
 // </li>
 // `;
 
-class TodoItem extends  HTMLElement {
+class TodoItem extends HTMLElement {
     constructor() {
         super();
         this._shadowRoot = this.attachShadow({ 'mode': 'open'});
@@ -66,10 +66,7 @@ class TodoItem extends  HTMLElement {
     }
 
     connectedCallback() {
-        console.log('inConnectedCallback')
-        console.log('inConnectedCallback - this', this)
         if(!this.hasAttribute('text')) {
-            // this.setAttribute('text', 'placeholder');
             this['text'] = 'placeholder';
         }
 
@@ -77,7 +74,7 @@ class TodoItem extends  HTMLElement {
     }
 
     _renderTodoItem() {
-        // why are we checking if it has an attribute and setting the same attribute if it does
+        // checking if element has attribute and if so, setting it on the checkbox
         if (this.hasAttribute('checked')) {
             this.$item.classList.add('completed');
             this.$checkbox.setAttribute('checked', '')
@@ -93,9 +90,6 @@ class TodoItem extends  HTMLElement {
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        console.log('oldValue', oldValue)
-        console.log('name', name)
-        console.log('newValue', newValue)
         switch(name){
             case 'text':
                 this._text = newValue;
