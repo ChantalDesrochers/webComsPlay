@@ -92,8 +92,6 @@ class TodoApp extends HTMLElement {
             $todoItem.addEventListener('onRemove', this._removeTodo.bind(this));
             $todoItem.addEventListener('onToggle', this._toggleTodo.bind(this));
 
-            console.log('todo item in render todo list', $todoItem)
-
             this.$todoList.appendChild($todoItem);
         })
     }
