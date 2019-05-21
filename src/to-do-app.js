@@ -3,10 +3,29 @@ const template = document.createElement('template');
 // template is cheaper than calling .innerHtml on all instances of the component
 template.innerHTML = `
 <style>
-@import "src/to-do-app.css"
+:host {
+    display: block;
+    font-family: sans-serif;
+    text-align: center;
+    }
+ 
+    button {
+    border: none;
+    cursor: pointer;
+    }
+ 
+    ul {
+    list-style: none;
+    padding: 0;
+    }
+ 
+    h1 {
+        color: red;
+    } 
 </style>
 
 <h1>To do</h1>
+<p><slot></slot></p>
 
 <input type="text" placeholder="Add a new to do"></input>
 <button>✅</button>
@@ -22,6 +41,7 @@ class TodoApp extends HTMLElement {
         this._shadowRoot.appendChild(template.content.cloneNode(true));
         this.$todoList = this._shadowRoot.querySelector('ul');
         this.$input = this._shadowRoot.querySelector('input');
+        this.$style = this._shadowRoot.querySelector('style');
 
         this.$submitButton = this._shadowRoot.querySelector('button');
         this.$submitButton.addEventListener('click', this._addTodo.bind(this))
@@ -81,6 +101,16 @@ class TodoApp extends HTMLElement {
     _removeTodo(e) {
         this._todos.splice(e.detail, 1);
         this._renderTodoList();
+    }
+
+    static get observedAttributes() {
+        return ['stl'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+       if (name === 'stl') {
+           this.$style.innerHTML = `@import "src/${newValue}.css"`;
+       }
     }
 }
 
