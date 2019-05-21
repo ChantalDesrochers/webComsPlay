@@ -1,4 +1,5 @@
 const template = document.createElement('template');
+const templateTwo = document.createElement('template2');
 
 // template is cheaper than calling .innerHtml on all instances of the component
 template.innerHTML = `
@@ -19,12 +20,20 @@ template.innerHTML = `
     padding: 0;
     }
 </style>
+<slot></slot>
 <h1>To do</h1>
 
 <input type="text" placeholder="Add a new to do"></input>
 <button>✅</button>
+<p>Date</p>
+
 
 <ul id="todos"></ul>
+<slot></slot>
+`;
+
+templateTwo.innerHTML = `
+<h3>LALALALA</h3>
 `;
 
 class TodoApp extends HTMLElement {
@@ -33,11 +42,15 @@ class TodoApp extends HTMLElement {
         this._shadowRoot = this.attachShadow({ 'mode': 'open'});
         //cloning template to shadowroot
         this._shadowRoot.appendChild(template.content.cloneNode(true));
+        // this._shadowRoot.appendChild(templateTwo.content.cloneNode(true));
         this.$todoList = this._shadowRoot.querySelector('ul');
         this.$input = this._shadowRoot.querySelector('input');
 
+        console.log('slot query selector', this._shadowRoot.querySelector('slot'));
+        console.log('h1 query selector', this._shadowRoot.querySelector('h1'))
         this.$submitButton = this._shadowRoot.querySelector('button');
         this.$submitButton.addEventListener('click', this._addTodo.bind(this))
+       
         document.querySelector('to-do-app').todos = [];
     }
 
@@ -55,7 +68,8 @@ class TodoApp extends HTMLElement {
         console.log('input value', this.$input.value)
         console.log('todos', this._todos)
         if(this.$input.value.length > 0) {
-            this._todos.push({ text: this.$input.value, checked: false})
+            // this._todos.push({ text: this.$input.value, checked: false, date: 'today'})
+            this._todos.push({ text: this.$input.value, checked: false, date: new Date()})
             this._renderTodoList();
             this.$input.value = '';
         }
@@ -85,9 +99,12 @@ class TodoApp extends HTMLElement {
             }
 
             $todoItem.setAttribute('index', index);
+            $todoItem.setAttribute('date', todo.date)
 
             $todoItem.addEventListener('onRemove', this._removeTodo.bind(this));
             $todoItem.addEventListener('onToggle', this._toggleTodo.bind(this));
+
+            console.log('todo item in render todo list', $todoItem)
 
             this.$todoList.appendChild($todoItem);
         })
