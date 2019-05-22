@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +8,32 @@
     <script type="module" src="src/to-do-app.js"></script>
     <script type="module" src="src/to-do-item.js"></script>
     <title>Webcomponent Play</title>
+    <style>
+        .separator {
+            margin-top: 50px;
+            border: 1px black solid;
+        }
+    </style>
 </head>
+
 <body>
     Fun fun fun!
-    <div>
-    <to-do-app>
-        <h1 slot="title">Replacement Title</h1>
-        <p slot="description">This is an optional description... blahblahblah.</p>
-        <p slot="description">This is another description, see how I display.</p>
-        <h3 slot="subtitle">Replacement Subtitle</h3>
-        <h3 slot="subtitle">Another replacement</h3>
-        <button slot="selectors">Select All</button>
-        <button slot="selectors">Clear All</button>
-    </to-do-app>
+    <div class="separator">
+        <to-do-app>
+            <h1 slot="title">Replacement Title</h1>
+            <p slot="description">This is an optional description... blahblahblah.</p>
+            <p slot="description">This is another description, see how I display.</p>
+            <h3 slot="subtitle">Replacement Subtitle</h3>
+            <h3 slot="subtitle">Another replacement</h3>
+            <button slot="selectors">Select All</button>
+            <button slot="selectors">Clear All</button>
+        </to-do-app>
     </div>
-    <to-do-app>
-    </to-do-app>
+    <div class="separator">
+        <to-do-app>
+        </to-do-app>
+    </div>
+    
 </body>
+
 </html>
