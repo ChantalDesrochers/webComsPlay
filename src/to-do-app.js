@@ -18,19 +18,44 @@ template.innerHTML = `
     list-style: none;
     padding: 0;
     }
- 
+
     h1 {
         color: red;
-    } 
+    }
+  
+:host([blue]) {
+    background: lightblue;
+    h1: var(--to-do-app-h2, blue);
+}
+
+
+:host(.blue) {
+    color: blue;
+}
+
+:host(.blue) > h1 {
+    color: blue;
+}
+
+:host-context(.bluetheme) {
+    color: blue;
+}
+
+:host-context(.bluetheme) > h1 {
+    color: blue;
+}
+
 </style>
 
 <h1>To do</h1>
-<p><slot></slot></p>
+<p>Press enter to add a to do</p>
 
 <input type="text" placeholder="Add a new to do"></input>
 <button>✅</button>
 
 <ul id="todos"></ul>
+
+<p>---------------------------</p>
 `;
 
 class TodoApp extends HTMLElement {
