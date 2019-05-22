@@ -35,9 +35,6 @@ class TodoItem extends HTMLElement {
         this.$text = this._shadowRoot.querySelector('label');
         this.$date = this._shadowRoot.querySelector('p');
 
-        console.log('date in constructor', this.$date)
-        console.log('text in constructor', this.$text)
-
         this.$removeButton.addEventListener('click', (e) => {
             this.dispatchEvent(new CustomEvent('onRemove', {detail: this.index}));
         });
@@ -47,19 +44,6 @@ class TodoItem extends HTMLElement {
         });
     }
 
-    // get checked() {
-    //     return this.hasAttribute('checked');
-    // }
-
-    // set checked(val) {
-    //     console.log('in setter', val)
-    //     if (val) {
-    //         this.setAttribute('checked', '')
-    //     } else {
-    //         this.removeAttribute('checked');
-    //     }
-    // }
-
     get index() {
         return this._index;
     }
@@ -68,25 +52,12 @@ class TodoItem extends HTMLElement {
         this.setAttribute('index', val);
     }
 
-    // get date() {
-    //     return this._date;
-    // }
-
-    // set date(val) {
-    //     console.log('in set date', val)
-    //     this.setAttribute('date', val)
-    // }
-
     connectedCallback() {
-        console.log('inConnectedCallback')
-        console.log('inConnectedCallback - this', this)
         if(!this.hasAttribute('text')) {
-            // this.setAttribute('text', 'placeholder');
             this['text'] = 'placeholder';
         }
 
         if (!this.hasAttribute('date')) {
-            console.log('in connected callback...date')
             this['date'] = 'today';
         }
 
@@ -94,7 +65,6 @@ class TodoItem extends HTMLElement {
     }
 
     _renderTodoItem() {
-        // why are we checking if it has an attribute and setting the same attribute if it does
         if (this.hasAttribute('checked')) {
             this.$item.classList.add('completed');
             this.$checkbox.setAttribute('checked', '')
@@ -103,8 +73,6 @@ class TodoItem extends HTMLElement {
             this.$checkbox.removeAttribute('checked')
         }
         this.$text.innerHTML = this._text;
-        console.log('this.$date in render todo', this.$date)
-        console.log('this._date in render todo', this._date)
         this.$date.innerHTML = this._date;
     }
 
@@ -113,9 +81,6 @@ class TodoItem extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        console.log('oldValue', oldValue)
-        console.log('name', name)
-        console.log('newValue typeof', typeof newValue)
         switch(name){
             case 'text':
                 this._text = newValue;

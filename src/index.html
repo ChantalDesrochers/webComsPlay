@@ -10,12 +10,17 @@
 </head>
 <body>
     Fun fun fun!
-    <to-do-app h1="Replacement Title">
+    <div>
+    <to-do-app>
+        <h1 slot="title">Replacement Title</h1>
         <p slot="description">This is an optional description... blahblahblah.</p>
+        <p slot="description">This is another description, see how I display.</p>
         <h3 slot="subtitle">Replacement Subtitle</h3>
+        <h3 slot="subtitle">Another replacement</h3>
         <button slot="selectors">Select All</button>
         <button slot="selectors">Clear All</button>
     </to-do-app>
+    </div>
     <to-do-app>
     </to-do-app>
 </body>

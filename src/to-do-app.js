@@ -26,7 +26,8 @@ template.innerHTML = `
     }
 </style>
 
-<h1>To do</h1>
+<slot name="title"><h1>To do</h1></slot>
+
 <slot name="subtitle"><h3>Fall back</h3></slot>
 <slot name="description"></slot>
 
@@ -48,13 +49,9 @@ class TodoApp extends HTMLElement {
         this._shadowRoot = this.attachShadow({ 'mode': 'open'});
         //cloning template to shadowroot
         this._shadowRoot.appendChild(template.content.cloneNode(true));
-        // this._shadowRoot.appendChild(templateTwo.content.cloneNode(true));
         this.$todoList = this._shadowRoot.querySelector('ul');
         this.$input = this._shadowRoot.querySelector('input');
-        this.$h1Title = this._shadowRoot.querySelector('h1');
 
-        console.log('slot query selector', this._shadowRoot.querySelector('slot'));
-        console.log('h1 query selector', this._shadowRoot.querySelector('h1'))
         this.$submitButton = this._shadowRoot.querySelector('button');
         this.$submitButton.addEventListener('click', this._addTodo.bind(this))
        
@@ -72,7 +69,6 @@ class TodoApp extends HTMLElement {
 
     _addTodo() {
         if(this.$input.value.length > 0) {
-            // this._todos.push({ text: this.$input.value, checked: false, date: 'today'})
             this._todos.push({ text: this.$input.value, checked: false, date: new Date()})
             this._renderTodoList();
             this.$input.value = '';
@@ -81,12 +77,6 @@ class TodoApp extends HTMLElement {
 
     _toggleTodo(e) {
         const todo = this._todos[e.detail];
-        console.log('todo in toggle', todo)
-        // write this in another way 
-        // this._todos[e.detail] = Object.assign({}, todo, {
-        //     checked: !todo.checked
-        // });
-
         this._todos[e.detail] = {...todo, checked: !todo.checked}
         this._renderTodoList();
     }
@@ -108,8 +98,6 @@ class TodoApp extends HTMLElement {
             $todoItem.addEventListener('onRemove', this._removeTodo.bind(this));
             $todoItem.addEventListener('onToggle', this._toggleTodo.bind(this));
 
-            console.log('todo item in render todo list', $todoItem)
-
             this.$todoList.appendChild($todoItem);
         })
     }
@@ -117,16 +105,6 @@ class TodoApp extends HTMLElement {
     _removeTodo(e) {
         this._todos.splice(e.detail, 1);
         this._renderTodoList();
-    }
-
-    static get observedAttributes() {
-        return ['h1'];
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'h1') {
-            this.$h1Title.innerHTML = newValue;
-        }
     }
 }
 
