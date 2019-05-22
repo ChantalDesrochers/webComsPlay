@@ -23,9 +23,8 @@ template.innerHTML = `
         color: red;
     }
   
-:host([blue]) {
-    background: lightblue;
-    h1: var(--to-do-app-h2, blue);
+:host([blue]) > h1 {
+    color: var(--to-do-app-h2, blue);
 }
 
 
