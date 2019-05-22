@@ -1,5 +1,4 @@
 const template = document.createElement('template');
-const templateTwo = document.createElement('template2');
 
 // template is cheaper than calling .innerHtml on all instances of the component
 template.innerHTML = `
@@ -20,8 +19,9 @@ template.innerHTML = `
     padding: 0;
     }
 </style>
-<slot></slot>
+
 <h1>To do</h1>
+<slot></slot>
 
 <input type="text" placeholder="Add a new to do"></input>
 <button>✅</button>
@@ -29,11 +29,7 @@ template.innerHTML = `
 
 
 <ul id="todos"></ul>
-<slot></slot>
-`;
 
-templateTwo.innerHTML = `
-<h3>LALALALA</h3>
 `;
 
 class TodoApp extends HTMLElement {
@@ -45,6 +41,7 @@ class TodoApp extends HTMLElement {
         // this._shadowRoot.appendChild(templateTwo.content.cloneNode(true));
         this.$todoList = this._shadowRoot.querySelector('ul');
         this.$input = this._shadowRoot.querySelector('input');
+        this.$h1Title = this._shadowRoot.querySelector('h1');
 
         console.log('slot query selector', this._shadowRoot.querySelector('slot'));
         console.log('h1 query selector', this._shadowRoot.querySelector('h1'))
@@ -55,7 +52,6 @@ class TodoApp extends HTMLElement {
     }
 
     set todos(value) {
-        console.log('value in set todos', value)
         this._todos = value;
         this._renderTodoList();
     }
@@ -65,8 +61,6 @@ class TodoApp extends HTMLElement {
     }
 
     _addTodo() {
-        console.log('input value', this.$input.value)
-        console.log('todos', this._todos)
         if(this.$input.value.length > 0) {
             // this._todos.push({ text: this.$input.value, checked: false, date: 'today'})
             this._todos.push({ text: this.$input.value, checked: false, date: new Date()})
@@ -113,6 +107,16 @@ class TodoApp extends HTMLElement {
     _removeTodo(e) {
         this._todos.splice(e.detail, 1);
         this._renderTodoList();
+    }
+
+    static get observedAttributes() {
+        return ['h1'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'h1') {
+            this.$h1Title.innerHTML = newValue;
+        }
     }
 }
 
