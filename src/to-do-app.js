@@ -18,17 +18,27 @@ template.innerHTML = `
     list-style: none;
     padding: 0;
     }
+
+    .headers {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 </style>
 
 <h1>To do</h1>
-<slot></slot>
+<slot name="subtitle"><h3>Fall back</h3></slot>
+<slot name="description"></slot>
 
+<div class="headers">
 <input type="text" placeholder="Add a new to do"></input>
 <button>✅</button>
 <p>Date</p>
-
+</div>
 
 <ul id="todos"></ul>
+
+<slot name="selectors"></slot>
 
 `;
 
