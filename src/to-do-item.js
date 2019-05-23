@@ -77,10 +77,11 @@ class TodoItem extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ['text', 'checked', 'index', 'date'];
+        return ['text', 'checked', 'index', 'date', 'add'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
+        console.log('name', name)
         switch(name){
             case 'text':
                 this._text = newValue;
@@ -93,6 +94,10 @@ class TodoItem extends HTMLElement {
                 break;
             case 'date':
                 this._date = newValue;
+                break;
+            case 'add':
+                console.log('new add text value', newValue);
+                break;
         }
     }
 }

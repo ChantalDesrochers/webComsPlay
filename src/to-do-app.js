@@ -20,16 +20,23 @@ template.innerHTML = `
     }
 
     .headers {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     }
+
+    .nest {
+    display: none;
+    }
+
 </style>
 
 <slot name="title"><h1>To do</h1></slot>
 
 <slot name="subtitle"><h3>Fall back</h3></slot>
 <slot name="description"></slot>
+
+<slot name="top"></slot>
 
 <div class="headers">
 <input type="text" placeholder="Add a new to do"></input>
@@ -40,6 +47,10 @@ template.innerHTML = `
 <ul id="todos"></ul>
 
 <slot name="selectors"></slot>
+
+<slot name="bottom"></slot>
+
+<slot name="list"></slot>
 
 `;
 
@@ -54,8 +65,19 @@ class TodoApp extends HTMLElement {
 
         this.$submitButton = this._shadowRoot.querySelector('button');
         this.$submitButton.addEventListener('click', this._addTodo.bind(this))
-       
-        document.querySelector('to-do-app').todos = [];
+        this._todos = [];
+        this.$slots = this._shadowRoot.querySelectorAll('slot')
+        // console.log('slots', this.$slots)
+        // this.$slots.forEach((slot) => {
+        //     console.log('slot name', slot.attributes.name)
+        //     // console.log('slot name', slot.attributes.name)
+        // })
+
+        console.log('list slots', this._shadowRoot.querySelectorAll("slot[name='list']"))
+        console.log('list slot', this._shadowRoot.querySelector("slot[name='list']"))
+        console.log('inner html of slot?', this._shadowRoot.querySelector("slot[name='list']").assignedNodes({flatten: true})[0])
+        this.$listContent = this._shadowRoot.querySelector("slot[name='list']").assignedNodes({flatten: true})[0];
+        // console.log('assigned nodes', assignedNodes)
     }
 
     set todos(value) {
@@ -83,7 +105,10 @@ class TodoApp extends HTMLElement {
 
     _renderTodoList() {
         this.$todoList.innerHTML = '';
-        
+
+        console.log('list content', this.$listContent.outerHTML)
+        console.log('typeof', typeof this.$listContent.outerHTML)
+        let customText = this.$listContent.outerHTML
         this._todos.forEach((todo, index) => {
             let $todoItem = document.createElement('to-do-item');
             $todoItem.setAttribute('text', todo.text);
@@ -94,6 +119,9 @@ class TodoApp extends HTMLElement {
 
             $todoItem.setAttribute('index', index);
             $todoItem.setAttribute('date', todo.date)
+            $todoItem.setAttribute('add', customText)
+            // $todoItem.setAttribute('add', '<p>werwaerwer</p>')
+            // $todoItem.setAttribute('add', this.$listContent.outerHTML)
 
             $todoItem.addEventListener('onRemove', this._removeTodo.bind(this));
             $todoItem.addEventListener('onToggle', this._toggleTodo.bind(this));
