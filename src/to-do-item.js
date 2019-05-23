@@ -42,6 +42,12 @@ class TodoItem extends HTMLElement {
         this.$checkbox.addEventListener('click', (e) => {
             this.dispatchEvent(new CustomEvent('onToggle', {detail: this.index}));
         });
+
+        // console.log('todoapp?', window.document.querySelector('to-do-app'))
+        // let todoApp = window.document.querySelector('to-do-app')
+        // console.log(todoApp.lContent)
+
+    //     console.log('this', this.props)
     }
 
     get index() {
@@ -50,6 +56,18 @@ class TodoItem extends HTMLElement {
 
     set index(val) {
         this.setAttribute('index', val);
+    }
+
+    get checked() {
+        return this.hasAttribute('checked')
+    }
+
+    set checked(val) {
+        if (val) {
+            this.setAttribute('checked', '')
+        } else {
+            this.removeAttribute('checked')
+        }
     }
 
     connectedCallback() {
@@ -74,7 +92,10 @@ class TodoItem extends HTMLElement {
         }
         this.$text.innerHTML = this._text;
         this.$date.innerHTML = this._date;
-        this.$date.appendChild(this._additionaText)
+
+        if (this.hasAttribute('add')) {
+            this.$date.appendChild(this._additionaText)
+        }
     }
 
     static get observedAttributes() {
@@ -82,9 +103,11 @@ class TodoItem extends HTMLElement {
     }
 
     _convertStringToHTML(string) {
-        const parser = new DOMParser();
-        let dom = parser.parseFromString(string, 'text/html');
-        return dom.querySelector("div[slot='list']");
+        // const parser = new DOMParser();
+        // let dom = parser.parseFromString(string, 'text/html');
+        let slotNode = document.createRange().createContextualFragment(string)
+        return slotNode;
+        // return dom.querySelector("div[slot='list']");
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
