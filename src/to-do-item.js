@@ -74,10 +74,17 @@ class TodoItem extends HTMLElement {
         }
         this.$text.innerHTML = this._text;
         this.$date.innerHTML = this._date;
+        this.$date.appendChild(this._additionaText)
     }
 
     static get observedAttributes() {
         return ['text', 'checked', 'index', 'date', 'add'];
+    }
+
+    _convertStringToHTML(string) {
+        const parser = new DOMParser();
+        let dom = parser.parseFromString(string, 'text/html');
+        return dom.querySelector("div[slot='list']");
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -96,7 +103,7 @@ class TodoItem extends HTMLElement {
                 this._date = newValue;
                 break;
             case 'add':
-                console.log('new add text value', newValue);
+                this._additionaText = this._convertStringToHTML(newValue);
                 break;
         }
     }
