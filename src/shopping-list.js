@@ -29,6 +29,10 @@ template.innerHTML = `
         display: none;
         }
 
+    .hide {
+        display: none;
+    }
+
 </style>
 
 <slot name="title"><h1>Wish List</h1></slot>
@@ -96,7 +100,6 @@ class ShoppingList extends HTMLElement {
 
     _renderShoppingList() {
         this.$shoppingList.innerHTML = '';
-        let customText = this.$listContent ? this.$listContent.outerHTML : '';
         this._items.forEach((todo, index) => {
             let $shoppingItem = document.createElement('shopping-item');
             $shoppingItem.setAttribute('text', todo.text);
@@ -105,8 +108,8 @@ class ShoppingList extends HTMLElement {
                 $shoppingItem.setAttribute('checked', ''); 
             }
 
-            if (customText) {
-                $shoppingItem.setAttribute('add', customText)
+            if (this.$listContent) {
+                $shoppingItem.specialText = this.$listContent;
             }
 
             $shoppingItem.setAttribute('index', index);

@@ -87,22 +87,17 @@ class ShoppingItem extends HTMLElement {
         this.$text.innerHTML = this._text;
         this.$date.innerHTML = this._date;
 
-        if (this.hasAttribute('add')) {
-            this.$date.appendChild(this._additionaText)
+        if (this.specialText) {
+            this.$date.appendChild(this.specialText)
         }
+ 
     }
 
     static get observedAttributes() {
-        return ['text', 'checked', 'index', 'date', 'add'];
-    }
-
-    _convertStringToHTML(string) {
-        let slotNode = document.createRange().createContextualFragment(string)
-        return slotNode;
+        return ['text', 'checked', 'index', 'date'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        console.log('name', name)
         switch(name){
             case 'text':
                 this._text = newValue;
@@ -115,9 +110,6 @@ class ShoppingItem extends HTMLElement {
                 break;
             case 'date':
                 this._date = newValue;
-                break;
-            case 'add':
-                this._additionaText = this._convertStringToHTML(newValue);
                 break;
         }
     }
