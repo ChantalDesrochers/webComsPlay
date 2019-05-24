@@ -1,6 +1,6 @@
 # Inserting Additional HTML Elements
 
-User story --> As a developer I want to be able to add additional html elements.
+User story --> As a developer I want to be able to add additional html elements or modify existing html elements in my custom elements (including nested custom elements)
 
 ## Getting Started
 
