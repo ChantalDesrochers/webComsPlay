@@ -22,7 +22,7 @@ template.innerHTML = `
 </li>
 `;
 
-class TodoItem extends HTMLElement {
+class ShoppingItem extends HTMLElement {
     constructor() {
         super();
         this._shadowRoot = this.attachShadow({ 'mode': 'open'});
@@ -69,10 +69,10 @@ class TodoItem extends HTMLElement {
             this['text'] = 'placeholder';
         }
 
-        this._renderTodoItem();
+        this._renderShoppingItem();
     }
 
-    _renderTodoItem() {
+    _renderShoppingItem() {
         // why are we checking if it has an attribute and setting the same attribute if it does
         if (this.hasAttribute('checked')) {
             this.$item.classList.add('completed');
@@ -103,4 +103,4 @@ class TodoItem extends HTMLElement {
     }
 }
 
-window.customElements.define('to-do-item', TodoItem)
+window.customElements.define('shopping-item', ShoppingItem)
