@@ -5,9 +5,10 @@ User story --> As a developer I want to be able to add additional html elements 
 ## Getting Started
 
 1. Clone the repository
-2. npm install
-3. 'npm run start' to start the server
-4. Visit http://localhost:8080/
+2. Checkout to this branch (userInsertedText)
+3. npm install
+4. 'npm run start' to start the server
+5. Visit http://localhost:8080/
 
 ### Background information
 
