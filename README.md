@@ -41,9 +41,11 @@ In the index.html file:
 - pulled the inner html from the shadow root and set as an attribute when creating instances of the nested element
 - convert back to dom elements in the attributeChangedCallback within the nested <shopping-item> element
   THIS IS LIKELY NOT THE WAY TO GO ABOUT IT - LARGER SLOTS PASSED THROUGH ATTRIBUTES IS NOT IDEAL
+ 
+ --- The fifth <shopping-list> ---
+ - hid the title by adding a class
+ - can use a similar class to give users the option of hiding elements
 
 ### Experimenting To dos
 
-- research better way to pass html through multiple custom elements
-- add an experiment that adds ability to hide existing elements contained in the custom element
 - research better way to pass html through multiple custom elements
