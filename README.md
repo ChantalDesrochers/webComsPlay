@@ -48,4 +48,4 @@ In the index.html file:
 
 ### Experimenting To dos
 
-- research better way to pass html through multiple custom elements
+- research better way to pass html through multiple custom elements - events, properties?
