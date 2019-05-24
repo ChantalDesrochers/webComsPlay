@@ -23,7 +23,7 @@ template.innerHTML = `
 </li>
 `;
 
-class TodoItem extends HTMLElement {
+class ShoppingItem extends HTMLElement {
     constructor() {
         super();
         this._shadowRoot = this.attachShadow({ 'mode': 'open'});
@@ -42,12 +42,6 @@ class TodoItem extends HTMLElement {
         this.$checkbox.addEventListener('click', (e) => {
             this.dispatchEvent(new CustomEvent('onToggle', {detail: this.index}));
         });
-
-        // console.log('todoapp?', window.document.querySelector('to-do-app'))
-        // let todoApp = window.document.querySelector('to-do-app')
-        // console.log(todoApp.lContent)
-
-    //     console.log('this', this.props)
     }
 
     get index() {
@@ -79,10 +73,10 @@ class TodoItem extends HTMLElement {
             this['date'] = 'today';
         }
 
-        this._renderTodoItem();
+        this._renderShoppingItem();
     }
 
-    _renderTodoItem() {
+    _renderShoppingItem() {
         if (this.hasAttribute('checked')) {
             this.$item.classList.add('completed');
             this.$checkbox.setAttribute('checked', '')
@@ -103,11 +97,8 @@ class TodoItem extends HTMLElement {
     }
 
     _convertStringToHTML(string) {
-        // const parser = new DOMParser();
-        // let dom = parser.parseFromString(string, 'text/html');
         let slotNode = document.createRange().createContextualFragment(string)
         return slotNode;
-        // return dom.querySelector("div[slot='list']");
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -132,4 +123,4 @@ class TodoItem extends HTMLElement {
     }
 }
 
-window.customElements.define('to-do-item', TodoItem)
+window.customElements.define('shopping-item', ShoppingItem)

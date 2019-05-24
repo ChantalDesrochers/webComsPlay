@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type="module" src="src/to-do-app.js"></script>
-    <script type="module" src="src/to-do-item.js"></script>
+    <script type="module" src="src/shopping-list.js"></script>
+    <script type="module" src="src/shopping-item.js"></script>
     <title>Webcomponent Play</title>
     <style>
         .separator {
@@ -19,40 +19,36 @@
 <body>
     Experiments with custom content!
     <div class="separator">
-        <to-do-app>
-            <h1 slot="title">Replacement Title</h1>
+        <shopping-list>
+            <h2 slot="title">Replacement Title with h2 tag</h2>
             <p slot="description">This is an optional description... blahblahblah.</p>
             <p slot="description">This is another description, see how I display.</p>
             <h3 slot="subtitle">Replacement Subtitle</h3>
             <h3 slot="subtitle">Another replacement</h3>
             <button slot="selectors">Select All</button>
             <button slot="selectors">Clear All</button>
-        </to-do-app>
+        </shopping-list>
     </div>
     <div class="separator">
-        <to-do-app>
-        </to-do-app>
+        <shopping-list>
+        </shopping-list>
     </div>
     <div class="separator">
-        <to-do-app>
+        <shopping-list>
             <div slot="bottom">
-                <h2>Your PB Store Wishlist</h3>
+                <h2>Your PB Store Wishlist</h2>
                     <p>At the PB Store, we know you may be considering a bunch of different peanut butters. Use our Wishlist to add all the peanut butter products your heart desires.</p>
             </div>
-        </to-do-app>
+        </shopping-list>
     </div>
     <div class="separator">
-        <to-do-app>
-            <!-- <p slot="list">testing adding into nested</p>
-            <p class="nest" slot="list" style="display: none">testing adding into nested</p> -->
-
-            <!-- <div slot="list" style="display: none"> -->
+        <shopping-list>
             <div slot="list">
-                <p>p tag 1</p>
-                <p>p tag 2</p>
-                <p>p tag 3</p>
+                <p>sale!</p>
+                <p>savings!</p>
+                <p>super!</p>
             </div>
-        </to-do-app>
+        </shopping-list>
     </div>
 </body>
 
