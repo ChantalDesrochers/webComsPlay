@@ -8,9 +8,18 @@
     <script type="module" src="src/to-do-item.js"></script>
     <title>Webcomponent Play</title>
     <style>
+    .bluetheme {
+        color: blue;
+        border: 3px blue solid;
+        font-family: sans-serif;
+    }
+
+    .bluetheme > p {
+        text-align: center;
+    }
     to-do-app {
        font-size: 15px;
-       --to-do-app-h2: red;
+       --to-do-app-h1: pink;
     }
     </style>
 </head>
@@ -20,13 +29,15 @@
     </to-do-app>
     <to-do-app>
     </to-do-app>
-    <to-do-app class="blue">
+    <to-do-app class="yellow">
     </to-do-app>
     <div class="bluetheme">
+        <p>I have a blue house and a blue window.</p>
     <to-do-app>
     </to-do-app>
+        <p>Blue is the colour I thought that I'd wear</p>
     </div>
-    <to-do-app blue>
+    <to-do-app header>
     </to-do-app>
 </body>
 </html>

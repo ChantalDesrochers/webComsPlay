@@ -42,18 +42,18 @@ class TodoItem extends HTMLElement {
         });
     }
 
-    // get checked() {
-    //     return this.hasAttribute('checked');
-    // }
+    get checked() {
+        return this.hasAttribute('checked');
+    }
 
-    // set checked(val) {
-    //     console.log('in setter', val)
-    //     if (val) {
-    //         this.setAttribute('checked', '')
-    //     } else {
-    //         this.removeAttribute('checked');
-    //     }
-    // }
+    set checked(val) {
+        console.log('in setter', val)
+        if (val) {
+            this.setAttribute('checked', '')
+        } else {
+            this.removeAttribute('checked');
+        }
+    }
 
     get index() {
         return this._index;

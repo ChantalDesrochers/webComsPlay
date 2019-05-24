@@ -22,32 +22,27 @@ template.innerHTML = `
     h1 {
         color: red;
     }
-  
-:host([blue]) > h1 {
-    color: var(--to-do-app-h2, blue);
-}
-
-
-:host(.blue) {
-    color: blue;
-}
-
-:host(.blue) > h1 {
-    color: blue;
-}
-
-:host-context(.bluetheme) {
-    color: blue;
-}
 
 :host-context(.bluetheme) > h1 {
     color: blue;
 }
 
+:host([header]) > h1 {
+    color: var(--to-do-app-h1, orange)
+}
+
+:host(.yellow) {
+    color: yellow;
+}
+
+:host(.yellow) > h1 {
+    color: yellow;
+}
+
 </style>
 
-<h1>To do</h1>
-<p>Press enter to add a to do</p>
+<h1>Shopping List</h1>
+<p>Press enter or click the checkmark to add something to your wishlist!</p>
 
 <input type="text" placeholder="Add a new to do"></input>
 <button>✅</button>
@@ -68,9 +63,15 @@ class TodoApp extends HTMLElement {
         this.$style = this._shadowRoot.querySelector('style');
 
         this.$submitButton = this._shadowRoot.querySelector('button');
-        this.$submitButton.addEventListener('click', this._addTodo.bind(this))
+        this.$submitButton.addEventListener('click', this._addTodo.bind(this));
+
+        this.$input.addEventListener('keydown', (event) => {
+            if (event.key === "Enter") {
+                this._addTodo();
+            }
+        })
        
-        document.querySelector('to-do-app').todos = [];
+        this._todos = [];
     }
 
     set todos(value) {
