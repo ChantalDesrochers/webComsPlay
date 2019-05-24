@@ -26,15 +26,19 @@ User story --> As a developer I want to be able to externally customize the styl
 - pass in the name of the style sheet as an attribute
 - in the attributeChangedCallback set the inner html of the style tag to `@import "src/${newValue}.css"`
 - likely a better way to do this - have yet to Google best practices when using an external stylesheet in a custom element
+
 ---Styling using the element itself---
 - easy to do, requires nothing from the webComponent itself - users can do this on their own
 - limiting to what can be styled
+
 ---User Generated Class---
 - useful for using a predefined custom element theme
 - can likely make this more dynamic - variables for colors?
+
 ---User Generated Theme Pass---
 - webcomponent would need be built with the specific overarching theme in mind
 - potentially useful if style expectations are defined to user ahead of time and they want to use the class name to style neighbouring elements
+
 ---Style Hooks---
 - likely that a user will want to style individual elements within the custom element
 - would need to provide a style hook for every element?
