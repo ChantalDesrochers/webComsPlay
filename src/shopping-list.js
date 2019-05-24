@@ -28,7 +28,7 @@ template.innerHTML = `
 }
 
 :host([header]) > h1 {
-    color: var(--to-do-app-h1, orange)
+    color: var(--shopping-list-h1, orange)
 }
 
 :host(.yellow) {
@@ -75,7 +75,6 @@ class ShoppingList extends HTMLElement {
     }
 
     set items(value) {
-        console.log('value in set items', value)
         this._items = value;
         this._renderShoppingList();
     }
@@ -85,8 +84,6 @@ class ShoppingList extends HTMLElement {
     }
 
     _addItem() {
-        console.log('input value', this.$input.value)
-        console.log('items', this._items)
         if(this.$input.value.length > 0) {
             this._items.push({ text: this.$input.value, checked: false })
             this._renderShoppingList();
@@ -112,6 +109,10 @@ class ShoppingList extends HTMLElement {
                 $shoppingItem.setAttribute('checked', ''); 
             }
 
+            if (this.hasAttribute('header')) {
+                $shoppingItem.setAttribute('header', '')
+            }
+
             $shoppingItem.setAttribute('index', index);
 
             $shoppingItem.addEventListener('onRemove', this._removeShoppingItem.bind(this));
@@ -126,13 +127,28 @@ class ShoppingList extends HTMLElement {
         this._renderShoppingList();
     }
 
+    _createThemeStyle(color) {
+        console.log('in create theme style', color)
+        return `:host([theme="${color}"]) {
+            color: ${color};
+        }
+        
+        :host(.yellow) > h1 {
+            color: ${color};
+        }`
+    }
+
     static get observedAttributes() {
-        return ['stl'];
+        return ['stl', 'theme'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
        if (name === 'stl') {
            this.$style.innerHTML = `@import "src/${newValue}.css"`;
+       }
+       if (name === 'theme'){
+           console.log('in theme')
+           this._createThemeStyle(newValue);
        }
     }
 }

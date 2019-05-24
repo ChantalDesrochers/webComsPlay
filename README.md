@@ -4,7 +4,7 @@ User story --> As a developer I want to be able to externally customize the styl
 - completely overwrite existing styling and create my own stylesheet
 - apply a theme to only the custom element itself
 - apply a theme to an entire area (which includes the custom element itself)
-- tweak internal styles within the custom element
+- tweak individual items within the custom element itself
 
 ## Getting Started
 
@@ -43,10 +43,10 @@ User story --> As a developer I want to be able to externally customize the styl
 - likely that a user will want to style individual elements within the custom element
 - would need to provide a style hook for every element?
 - if custom elements have many styleable elements could get unwieldy
+- tested styling nested element with style hook
 
 ### Experimenting To Dos
 - look into making user passed class theme generation more dynamic
-- look into styling elements within a nested custom element (e.g. individual list item)
 - look into styling slot elements
 - look into ideal way to pass stylesheet to custom element
 

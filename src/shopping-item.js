@@ -14,6 +14,10 @@ template.innerHTML = `
     border: none;
     cursor: pointer;
     }
+
+    :host([header]) > li {
+        color: var(--shopping-item, orange)
+    }
 </style>
 <li class="item">
     <input type="checkbox">
@@ -73,7 +77,6 @@ class ShoppingItem extends HTMLElement {
     }
 
     _renderShoppingItem() {
-        // why are we checking if it has an attribute and setting the same attribute if it does
         if (this.hasAttribute('checked')) {
             this.$item.classList.add('completed');
             this.$checkbox.setAttribute('checked', '')
