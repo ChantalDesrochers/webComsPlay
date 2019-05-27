@@ -22,7 +22,7 @@ template.innerHTML = `
 </li>
 `;
 
-class TodoItem extends HTMLElement {
+class ShoppingItem extends HTMLElement {
     constructor() {
         super();
         this._shadowRoot = this.attachShadow({ 'mode': 'open'});
@@ -67,10 +67,10 @@ class TodoItem extends HTMLElement {
             this['text'] = 'placeholder';
         }
 
-        this._renderTodoItem();
+        this._renderShoppingItem();
     }
 
-    _renderTodoItem() {
+    _renderShoppingItem() {
         // checking if element has attribute and if so, setting it on the checkbox
         if (this.hasAttribute('checked')) {
             this.$item.classList.add('completed');
@@ -101,4 +101,4 @@ class TodoItem extends HTMLElement {
     }
 }
 
-window.customElements.define('to-do-item', TodoItem)
+window.customElements.define('to-do-item', ShoppingItem)
